@@ -8,8 +8,8 @@ YYSTYPE yylval;
 
 %x COMMENT
 
-WHITESPACE          ([ \t\n]+)
-COMMENT_LINE      ("//"[^\r\n]*)
+WHITESPACE          ([[:space:]]+)
+COMMENT_LINE      ("//"[^\n]*)
 COMMENT_START         ("/*")
 COMMENT_END         ("*/")
 ID                  ([A-Za-z][A-Za-z0-9_]*)
