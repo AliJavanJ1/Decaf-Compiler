@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
             case UNDEFINED_TOKEN:
                 cout << TokenNames[token - 256] << endl;
                 output_file << TokenNames[token - 256] << endl;
-//                return 0;
+                return 0;
                 break;
             default:
                 cout << yytext << endl;
