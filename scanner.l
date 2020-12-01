@@ -72,6 +72,7 @@ SYMBOLS             ([-+/*%=.,;!<>()[\]{}])
 "!="                { return T_NotEqual; }
 "&&"                { return T_And; }
 "||"                { return T_Or; }
+"[]"               { return T_Dims; }
 {SYMBOLS}           { return yytext[0];} //no TokenType for these
 
 "true"              { yylval.booleanLiteral = (yytext[0]=='t'); return T_BOOLEANLITERAL; }

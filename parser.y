@@ -7,11 +7,14 @@ int yyerror(char *s);
 
 %}
 
+%token UMINUS
+%token NOELSE
+
 %token T_ID T_INTLITERAL T_DOUBLELITERAL T_STRINGLITERAL T_BOOLEANLITERAL
            T_Void T_Int T_Double T_Bool T_String T_Class T_Interface T_Null T_This T_Extends
            T_Implements T_For T_While T_If T_Else T_Return T_Break T_Continue T_New T_NewArray T_Print
            T_ReadInteger T_ReadLine T_Dtoi T_Itod T_Btoi T_Itob T_Private T_Protected T_Public
-           T_LessEqual T_GreaterEqual T_Equal T_NotEqual T_And T_Or
+           T_LessEqual T_GreaterEqual T_Equal T_NotEqual T_And T_Or T_Dims
            UNDEFINED_TOKEN
            TOKENCOUNT
 
@@ -28,6 +31,19 @@ int yyerror(char *s);
     double doubleLiteral;
     char *id;
 }
+
+%nonassoc NOELSE
+%nonassoc T_Else
+%nonassoc '='
+%left T_Or
+%left T_And
+%nonassoc T_Equal T_NotEqual
+%nonassoc '<' T_LessEqual '>' T_GreaterEqual
+%left '+' '-'
+%left '*' '/' '%'
+%nonassoc '!' UMINUS
+%nonassoc '[' '.'
+%left T_Dims
 
 %%
 
@@ -62,7 +78,7 @@ T_Int
 | T_Bool
 | T_String
 | T_ID
-| Type '[' ']'
+| Type T_Dims
 ;
 
 FunctionDecl:
@@ -158,7 +174,7 @@ T_If '(' Expr ')' Stmt ElseStmt
 
 ElseStmt:
 T_Else Stmt
-|
+| %prec NOELSE
 ;
 
 WhileStmt:
@@ -202,7 +218,7 @@ LValue '=' Expr
 | Expr "∗" Expr
 | Expr '/' Expr
 | Expr '%' Expr
-| "−" Expr
+| "−" Expr %prec UMINUS
 | Expr '<' Expr
 | Expr T_LessEqual Expr
 | Expr '>' Expr
