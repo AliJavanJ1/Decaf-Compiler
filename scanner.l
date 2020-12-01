@@ -1,9 +1,12 @@
 %option noyywrap
+%option header-file="lex.yy.h"
 
 %{
-#include "scanner.h"
+#include "parser.tab.h"
 
-YYSTYPE yylval;
+#include <iostream>
+
+#define YY_DECL int yylex()
 %}
 
 %x COMMENT
