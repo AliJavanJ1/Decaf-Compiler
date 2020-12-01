@@ -76,7 +76,7 @@ Variable FormalsContinue
 ;
 
 FormalsContinue:
-',' Variable Formals_Continue
+',' Variable FormalsContinue
 |
 ;
 
@@ -90,7 +90,7 @@ T_Extends T_ID
 ;
 
 Implements:
-T_Implements T_ID
+T_Implements T_ID ImplementsContinue
 |
 ;
 
@@ -185,6 +185,11 @@ PrintStmt:
 T_Print '(' Expr ExprContinue ')' ';'
 ;
 
+ExprOrNot:
+Expr
+|
+;
+
 Expr:
 LValue '=' Expr
 | Constant
@@ -192,12 +197,12 @@ LValue '=' Expr
 | T_This
 | Call
 | '(' Expr ')'
-| Expr '+' Expr
-| Expr '−' Expr
-| Expr '∗' Expr
+| Expr "+" Expr
+| Expr "−" Expr
+| Expr "∗" Expr
 | Expr '/' Expr
 | Expr '%' Expr
-| '−' Expr
+| "−" Expr
 | Expr '<' Expr
 | Expr T_LessEqual Expr
 | Expr '>' Expr
