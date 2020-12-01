@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "scanner.h"
+#include "parser.tab.h"
+#include "lex.yy.h"
 
 using namespace std;
 
@@ -15,26 +16,6 @@ int main(int argc, char *argv[]) {
     ofstream output_file(output_file_path);
     yyin = fopen(input_file_path.c_str(), "r");
 
-
-    TokenType token;
-    while ((token = (TokenType) yylex())) {
-        switch (token) {
-            case T_ID:
-            case T_INTLITERAL:
-            case T_DOUBLELITERAL:
-            case T_STRINGLITERAL:
-            case T_BOOLEANLITERAL:
-                cout << TokenNames[token - 256] << " " << yytext << endl;
-                output_file << TokenNames[token - 256] << " " << yytext << endl;
-                break;
-            case UNDEFINED_TOKEN:
-                cout << TokenNames[token - 256] << endl;
-                output_file << TokenNames[token - 256] << endl;
-                return 0;
-                break;
-            default:
-                cout << yytext << endl;
-                output_file << yytext << endl;
-        }
-    }
+    yyparse();
+    return 0;
 }
