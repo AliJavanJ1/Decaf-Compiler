@@ -213,12 +213,12 @@ LValue '=' Expr
 | T_This
 | Call
 | '(' Expr ')'
-| Expr "+" Expr
-| Expr "−" Expr
-| Expr "∗" Expr
+| Expr '+' Expr
+| Expr '-' Expr
+| Expr '*' Expr
 | Expr '/' Expr
 | Expr '%' Expr
-| "−" Expr %prec UMINUS
+| '-' Expr %prec UMINUS
 | Expr '<' Expr
 | Expr T_LessEqual Expr
 | Expr '>' Expr
