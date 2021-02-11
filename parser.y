@@ -60,7 +60,7 @@ VariableDecl
 ;
 
 VariableDecls:
-VariableDecl VariableDecls
+VariableDecls VariableDecl
 |
 ;
 
